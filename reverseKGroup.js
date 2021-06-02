@@ -10,7 +10,7 @@ const { buildLink } = require("./utils.js");
  * @param {number} k
  * @return {ListNode}
  */
-var reverseKGroup = function (head, k) {
+var unused_reverseKGroup = function (head, k) {
   if (k === 1) return head;
 
   let prev = null;
@@ -46,7 +46,62 @@ var reverseKGroup = function (head, k) {
   return head;
 };
 
-const link = buildLink(10);
-const result = reverseKGroup(link, 4);
+var reverseKGroup = function (head, k) {
+  if (k === 1) return head;
+
+  let prev = null;
+  let curr = head;
+  let i = 1;
+  let next = null;
+
+  let prevPoint = null;
+  let point = null;
+
+  while (i <= k) {
+    next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = next;
+    i++;
+  }
+
+  if (!curr) return prev;
+
+  prevPoint = point;
+  point = head;
+  head = prev;
+  prev = null;
+
+  let backup = null;
+  let backupCurr = null;
+  while (curr) {
+    next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    if (i % k === 1) {
+      prevPoint = point;
+      point = curr;
+      backup = backupCurr = { val: curr.val, next: null };
+    } else {
+      backupCurr = backupCurr.next = { val: curr.val, next: null };
+    }
+    if (i % k === 0) {
+      prevPoint.next = prev;
+      if (!next) break;
+      prev = null;
+      backup = backupCurr = null;
+    }
+    if (!next) {
+      prevPoint.next = backup;
+      break;
+    }
+    curr = next;
+    i++;
+  }
+  return head;
+};
+
+const link = buildLink(11);
+const result = reverseKGroup(link, 3);
 const json = JSON.stringify(result);
 console.log(json);

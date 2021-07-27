@@ -1,10 +1,6 @@
 /**
- * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
- * }
+ * https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/
+* 给定一个二叉树，找出其最小深度。
  */
 /**
  * @param {TreeNode} root

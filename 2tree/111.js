@@ -56,3 +56,15 @@ var minDepth = function (root) {
     i++;
   }
 };
+
+var minDepth = function (root) {
+  if (!root) return 0;
+  const stack = [[root, 1]];
+  let i = 0;
+  while (i < stack.length) {
+    const [curr, dep] = stack[i];
+    if (!curr.left && !curr.right) return dep;
+    if (curr.left) stack.push([curr.left, dep + 1]);
+    if (curr.right) stack.push([curr.right, dep + 1]);
+  }
+};

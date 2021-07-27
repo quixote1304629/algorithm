@@ -66,5 +66,6 @@ var minDepth = function (root) {
     if (!curr.left && !curr.right) return dep;
     if (curr.left) stack.push([curr.left, dep + 1]);
     if (curr.right) stack.push([curr.right, dep + 1]);
+    i++;
   }
 };

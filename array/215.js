@@ -59,13 +59,6 @@ var findKthLargest = function(nums, k) {
   }
 }
 
-
-function swap(nums, a, b) {
-  let temp = nums[a];
-  nums[a] = nums[b];
-  nums[b] = temp;
-}
-
 const data = [6, 5, 1, 9, 4, 2, 3, 12];
 const res = findKthLargest(data, 2);
 console.log(res);

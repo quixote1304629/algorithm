@@ -30,13 +30,8 @@ var lengthOfLIS = function (nums) {
   return tail.length;
 };
 
-const result = lengthOfLIS([4, 10, 4, 3, 8, 9]);
-console.log(result);
-
-
-
-
-
+// const result = lengthOfLIS([4, 10, 4, 3, 8, 9]);
+// console.log(result);
 
 var lengthOfLIS2 = function (nums) {
   const len = nums.length;
@@ -53,3 +48,50 @@ var lengthOfLIS2 = function (nums) {
   }
   return Math.max(...dp);
 };
+
+/** 找出最长子序列 */
+function LIS(arr) {
+  // write code here
+  if (!arr.length) return [];
+  let res = [arr[0]];
+  let maxLen = new Array(arr.length).fill(1);
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] > res[res.length - 1]) {
+      res.push(arr[i]);
+      maxLen[i] = res.length;
+    } else {
+      // let pos = res.filter((item) => item>=arr[i])[0]
+      // let index = res.indexOf(pos)
+      let min = 0;
+      let max = res.length - 1;
+      while (min <= max) {
+        let mid = Math.floor((max + min) / 2);
+        if (res[mid] > arr[i]) {
+          max = mid - 1;
+        } else if (res[mid] < arr[i]) {
+          min = mid + 1;
+        } else {
+          min = mid;
+          break;
+        }
+      }
+      res[min] = arr[i];
+      maxLen[i] = min + 1;
+    }
+  }
+  console.log(res, maxLen)
+  let cur = res.length;
+  let index = maxLen.length - 1;
+  let result = [];
+  while (cur > 0) {
+    if (maxLen[index] == cur) {
+      result.unshift(arr[index]);
+      cur--;
+    }
+    index--;
+  }
+  return result;
+}
+
+const result = LIS([4, 10, 4, 3, 8,2, 9]);
+console.log(result);

@@ -21,5 +21,16 @@ var subsets = function (nums) {
   return result;
 };
 
+var subsets = function (nums, result = [[]]) {
+  if (!nums.length) return result;
+  const last = nums.pop();
+  const length = result.length;
+  for (let i = 0; i < length; i++) {
+    result.push([...result[i], last]);
+  }
+  subsets(nums, result);
+  return result;
+};
+
 const res = subsets([1, 2, 3, 4]);
 console.log(res);

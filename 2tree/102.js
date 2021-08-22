@@ -95,6 +95,18 @@ var levelOrder = function (root) {
   return result;
 };
 
+var levelOrder = function (root, deep = 0, result = []) {
+  if (!root) return result;
+  if (!result[deep]) {
+    result[deep] = []
+  }
+  console.log(root)
+  result[deep].push(root.val)
+  levelOrder(root.left, deep +1, result)
+  levelOrder(root.right, deep +1, result)
+  return result;
+};
+
 const data = {
   val: 3,
   left: { val: 9 },

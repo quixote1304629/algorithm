@@ -1,31 +1,24 @@
 /**
- * https://leetcode-cn.com/problems/kth-largest-element-in-an-array/
- * 给定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素。
- *
- * */
+ * https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/
+ * 输入整数数组 arr ，找出其中最小的 k 个数。例如，输入4、5、1、6、2、7、3、8这8个数字，则最小的4个数字是1、2、3、4。
+ */
 
 /**
- * @param {number[]} nums
+ * @param {number[]} arr
  * @param {number} k
- * @return {number}
+ * @return {number[]}
  */
-// var findKthLargest = function (nums, k) {
-//   nums = nums.sort((a, b) => a - b);
-//   return nums[k - 1];
-// };
-
-var findKthLargest = function (nums, k) {
-  let n = nums.length;
-  let target = n - k;
-  let left = 0,
-    right = n - 1;
+var getLeastNumbers = function (arr, k) {
+  let length = arr.length;
+  let left = 0;
+  let right = length - 1;
 
   while (true) {
-    let index = partition(nums, left, right); // 获取切分好的index , 左边比该值都小, 右边都大
+    let index = partition(arr, left, right); // 获取切分好的index , 左边比该值都小, 右边都大
 
-    if (index === target) {
-      return nums[target];
-    } else if (index < target) {
+    if (index === k) {
+      return arr.slice(0, k);
+    } else if (index < k) {
       // index 的值偏左，说明比较小，而 index 左边的值比index还小，那么就将左边界移到 index 右
       left = index + 1;
     } else {
@@ -58,8 +51,3 @@ var findKthLargest = function (nums, k) {
     nums[b] = temp;
   }
 };
-
-const data = [6, 12, 1, 9, 4, 2, 3, 5];
-const res = findKthLargest(data, 5);
-console.log(res);
-console.log(data);

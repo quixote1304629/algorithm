@@ -24,8 +24,8 @@ var maxProfit = function (prices) {
   if (length <= 1) return ans;
   let minLeft = prices[0];
   for (let i = 1; i < length; i++) {
-    if(minLeft > prices[i]) {
-      minLeft = prices[i]
+    if (minLeft > prices[i]) {
+      minLeft = prices[i];
     } else {
       ans = Math.max(ans, prices[i] - minLeft);
     }
@@ -33,6 +33,19 @@ var maxProfit = function (prices) {
   return ans;
 };
 
-// const res = maxProfit([7, 1, 5, 3, 6, 4]);
-const res = maxProfit([2, 4, 1]);
+var maxProfit = function (prices) {
+  let ans = 0
+  let minLeft = prices[0]
+  for (let i = 1; i < prices.length; i++) {
+    if(minLeft > prices[i]) {
+      minLeft = prices[i]
+    } else {
+      ans = Math.max(ans, prices[i] - minLeft)
+    }
+  }
+  return ans
+};
+
+const res = maxProfit([7, 1, 5, 3, 6, 4]);
+// const res = maxProfit([2, 4, 1]);
 console.log(res);

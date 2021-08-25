@@ -60,11 +60,10 @@ console.log("res: ", res);
  */
 var trap = function (height) {
   if (!height) return;
-
-  let left = 0,
-    right = height.length - 1; //位置记录
-  let maxLeft = 0,
-    maxRight = 0; //假设初始最大值
+  let left = 0;
+  let right = height.length - 1; //位置记录
+  let maxLeft = 0;
+  let maxRight = 0; //假设初始最大值
   let rain = 0;
   while (left < right) {
     if (height[left] < height[right]) {
@@ -84,4 +83,30 @@ var trap = function (height) {
     }
   }
   return rain;
+};
+
+var trap = function (height) {
+  let ans = 0;
+  let maxLeft = 0;
+  let maxRight = 0;
+  let i = 0;
+  let j = height.length - 1;
+  while (i < j) {
+    if (height[i] < height[j]) {
+      if (height[i] >= maxLeft) {
+        maxLeft = height[i];
+      } else {
+        ans = ans + (maxLeft - height[i]);
+      }
+      i++;
+    } else {
+      if (height[j] >= maxRight) {
+        maxRight = height[j];
+      } else {
+        ans = ans + (maxRight - height[j]);
+      }
+      j++;
+    }
+  }
+  return ans;
 };

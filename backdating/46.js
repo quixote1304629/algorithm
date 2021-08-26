@@ -23,5 +23,25 @@ var permute = function (nums, result = [[]]) {
   return permute(nums, result2);
 };
 
+var permute = function (nums) {
+  if (!nums.length) return [];
+  const result = [];
+  const sub = [];
+  const dfs = (list = []) => {
+    if (!list.length) {
+      result.push([...sub]);
+      return;
+    }
+
+    for (let i = 0; i < list.length; i++) {
+      sub.push(list[i]);
+      dfs([...list.slice(0, i), ...list.slice(i + 1)]);
+      sub.pop();
+    }
+  };
+  dfs(nums);
+  return result;
+};
+
 const res = permute([1, 2, 3]);
 console.log(res);

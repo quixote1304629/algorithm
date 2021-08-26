@@ -61,3 +61,7 @@ var mergeTwoLists = function(l1, l2) {
   }
 
 };
+
+var mergeTwoLists = function(l1, l2) {
+  
+}

@@ -50,6 +50,20 @@ var lengthOfLongestSubstring = function (s) {
   return res;
 };
 
+var lengthOfLongestSubstring = function (s = "") {
+  let startIndex = 0;
+  let res = 0;
+  for (let i = 0; i < s.length; i++) {
+    const oldIndex = s.indexOf(s[i], startIndex);
+    if (oldIndex < i) {
+      startIndex = oldIndex + 1;
+    } else {
+      res = Math.max(res, i - startIndex + 1);
+    }
+  }
+  return res;
+};
+
 // const data = "davdf";
 const data = "pwwkew";
 const res = lengthOfLongestSubstring(data);

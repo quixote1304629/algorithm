@@ -1,5 +1,5 @@
 const arr = [];
-const N = 10000000;
+const N = 20000000;
 for (let i = 0; i < N; i++) {
   const num = Math.floor(Math.random() * N + 1);
   arr.push(num);
@@ -54,7 +54,7 @@ function quickSort2(arr) {
   return arr;
 }
 
-var quick_sort = function (arr, l, r) {
+var quickSort3 = function (arr, l, r) {
   if (l >= r) {
     return;
   }
@@ -70,8 +70,8 @@ var quick_sort = function (arr, l, r) {
   var temp = arr[i];
   arr[i] = arr[l];
   arr[l] = temp;
-  quick_sort(arr, l, i - 1);
-  quick_sort(arr, i + 1, r);
+  quickSort3(arr, l, i - 1);
+  quickSort3(arr, i + 1, r);
 };
 
 // console.time("quickSort");
@@ -83,6 +83,6 @@ console.time("quickSort2");
 quickSort2(arr);
 console.timeEnd("quickSort2");
 
-// console.time("quick_sort");
-// quick_sort(arr, 0, arr.length-1);
-// console.timeEnd("quick_sort");
+// console.time("quickSort3");
+// quickSort3(arr, 0, arr.length-1);
+// console.timeEnd("quickSort3");

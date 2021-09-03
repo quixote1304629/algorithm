@@ -1,7 +1,7 @@
 function insertionSort(nums, start, end) {
   for (let i = start + 1; i <= end; ++i) {
-    let j = i,
-      pivot = nums[j];
+    let j = i;
+    let pivot = nums[j];
     while (j > start && nums[j - 1] > pivot) {
       nums[j] = nums[j - 1];
       --j;
@@ -19,8 +19,8 @@ function insertionSort(nums, start, end) {
 var sortArray = function (nums) {
   const n = nums.length;
   if (n <= 1) return nums;
-  let minValue = nums[0],
-    maxValue = nums[0];
+  let minValue = nums[0];
+  let maxValue = nums[0];
   for (let i = 0; i < n; ++i) {
     minValue = nums[i] < minValue ? nums[i] : minValue;
     maxValue = nums[i] > maxValue ? nums[i] : maxValue;
@@ -49,12 +49,7 @@ for (let i = 0; i < N; i++) {
   arr.push(num);
 }
 
-console.time("quickSort");
-const res = quickSort(arr);
+console.time("sortArray");
+const res = sortArray(arr);
 console.log(res);
-console.timeEnd("quickSort");
-
-// console.time("sortArray");
-// const res = sortArray(arr);
-// console.log(res);
-// console.timeEnd("sortArray");
+console.timeEnd("sortArray");

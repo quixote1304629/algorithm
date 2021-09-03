@@ -62,8 +62,8 @@ function quickSort3(arr) {
   }
 
   function partition(arr, left, right) {
-    // const random = Math.floor(Math.random() * (right - left + 1)) + left;
-    // swap(arr, left, random);
+    const random = Math.floor(Math.random() * (right - left + 1)) + left;
+    swap(arr, left, random);
     const pivot = arr[left];
 
     let j = left;

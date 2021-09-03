@@ -1,10 +1,3 @@
-const arr = [];
-const N = 10000000;
-for (let i = 0; i < N; i++) {
-  const num = Math.floor(Math.random() * N + 1);
-  arr.push(num);
-}
-
 var quickSort = function (arr) {
   if (arr.length < 1) return arr;
   const pivotIndex = arr.length >> 1;
@@ -53,7 +46,7 @@ function quickSort2(arr) {
   return arr;
 }
 
-/** 最优 */
+/**[需背诵] 最优 */
 function quickSort3(arr) {
   function swap(arr, i, j) {
     const temp = arr[i];
@@ -62,6 +55,7 @@ function quickSort3(arr) {
   }
 
   function partition(arr, left, right) {
+    // 随机数目的是为了稳定性
     const random = Math.floor(Math.random() * (right - left + 1)) + left;
     swap(arr, left, random);
     const pivot = arr[left];
@@ -87,6 +81,13 @@ function quickSort3(arr) {
   loop(arr, 0, arr.length - 1);
 }
 
+const arr = [];
+const N = 10000000;
+for (let i = 0; i < N; i++) {
+  const num = Math.floor(Math.random() * N + 1);
+  arr.push(num);
+}
+
 // console.time("quickSort");
 // quickSort(arr);
 // console.timeEnd("quickSort");
@@ -98,3 +99,5 @@ function quickSort3(arr) {
 console.time("quickSort3");
 quickSort3(arr);
 console.timeEnd("quickSort3");
+
+// console.log(arr)

@@ -1,5 +1,5 @@
 const arr = [];
-const N = 20000000;
+const N = 10000000;
 for (let i = 0; i < N; i++) {
   const num = Math.floor(Math.random() * N + 1);
   arr.push(num);
@@ -21,7 +21,6 @@ var quickSort = function (arr) {
   return quickSort(left).concat([pivot], quickSort(right));
 };
 
-/** 更快一点 */
 function quickSort2(arr) {
   function partition(left, right) {
     const pivot = arr[left];
@@ -54,35 +53,47 @@ function quickSort2(arr) {
   return arr;
 }
 
-var quickSort3 = function (arr, l, r) {
-  if (l >= r) {
-    return;
-  }
-  var i = l,
-    j = r;
-  while (i < j) {
-    while (i < j && arr[l] <= arr[j]) j--;
-    while (i < j && arr[l] >= arr[i]) i++;
-    var t = arr[i];
+/** 最优 */
+function quickSort3(arr) {
+  function swap(arr, i, j) {
+    const temp = arr[i];
     arr[i] = arr[j];
-    arr[j] = t;
+    arr[j] = temp;
   }
-  var temp = arr[i];
-  arr[i] = arr[l];
-  arr[l] = temp;
-  quickSort3(arr, l, i - 1);
-  quickSort3(arr, i + 1, r);
-};
+
+  function partition(arr, left, right) {
+    // const random = Math.floor(Math.random() * (right - left + 1)) + left;
+    // swap(arr, left, random);
+    const pivot = arr[left];
+
+    let j = left;
+    for (let i = left + 1; i <= right; i++) {
+      if (arr[i] < pivot) {
+        j++;
+        swap(arr, j, i);
+      }
+    }
+    swap(arr, left, j);
+  }
+
+  function loop(arr, left, right) {
+    if (left < right) {
+      const p = partition(arr, left, right);
+      loop(arr, left, p - 1);
+      loop(arr, p + 1, right);
+    }
+  }
+  loop(arr, 0, arr.length - 1);
+}
 
 // console.time("quickSort");
 // quickSort(arr);
 // console.timeEnd("quickSort");
 
-// 数据量大时，这个快一点
-console.time("quickSort2");
-quickSort2(arr);
-console.timeEnd("quickSort2");
+// console.time("quickSort2");
+// quickSort2(arr);
+// console.timeEnd("quickSort2");
 
-// console.time("quickSort3");
-// quickSort3(arr, 0, arr.length-1);
-// console.timeEnd("quickSort3");
+console.time("quickSort3");
+quickSort3(arr, 0, arr.length - 1);
+console.timeEnd("quickSort3");

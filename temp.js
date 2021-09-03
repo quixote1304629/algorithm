@@ -1,55 +1,42 @@
-function insertionSort(nums, start, end) {
-  for (let i = start + 1; i <= end; ++i) {
-    let j = i;
-    let pivot = nums[j];
-    while (j > start && nums[j - 1] > pivot) {
-      nums[j] = nums[j - 1];
-      --j;
+function quickSort3(arr) {
+  function swap(arr, i, j) {
+    const temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+  }
+
+  function partition(arr, left, right) {
+    const random = Math.floor(Math.random() * (right - left + 1)) + left;
+    swap(arr, left, random);
+    const pivot = arr[left];
+
+    let j = left;
+    for (let i = left + 1; i <= right; i++) {
+      if (arr[i] < pivot) {
+        j++;
+        swap(arr, j, i);
+      }
     }
-    if (j !== i) {
-      nums[j] = pivot;
+    swap(arr, left, j);
+  }
+
+  function loop(arr, left, right) {
+    if (left < right) {
+      const p = partition(arr, left, right);
+      loop(arr, left, p - 1);
+      loop(arr, p + 1, right);
     }
   }
-  return nums;
+  loop(arr, 0, arr.length - 1);
 }
-/**
- * @param {number[]} nums
- * @return {number[]}
- */
-var sortArray = function (nums) {
-  const n = nums.length;
-  if (n <= 1) return nums;
-  let minValue = nums[0];
-  let maxValue = nums[0];
-  for (let i = 0; i < n; ++i) {
-    minValue = nums[i] < minValue ? nums[i] : minValue;
-    maxValue = nums[i] > maxValue ? nums[i] : maxValue;
-  }
-  const m = maxValue - minValue + 1;
-  if (m > n && n < 1000) {
-    return insertionSort(nums, 0, n - 1);
-  }
-  const buckets = Array(m).fill(0);
-  for (let i = 0; i < n; ++i) {
-    buckets[nums[i] - minValue] += 1;
-  }
-  let k = 0;
-  for (let i = 0; i < m && k < n; ++i) {
-    for (let j = 0; j < buckets[i]; ++j) {
-      nums[k++] = i + minValue;
-    }
-  }
-  return nums;
-};
 
 const arr = [];
-const N = 10000000;
+const N = 300000;
 for (let i = 0; i < N; i++) {
   const num = Math.floor(Math.random() * N + 1);
   arr.push(num);
 }
 
-console.time("sortArray");
-const res = sortArray(arr);
-console.log(res);
-console.timeEnd("sortArray");
+console.time("quickSort3");
+quickSort3(arr);
+console.timeEnd("quickSort3");

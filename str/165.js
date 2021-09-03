@@ -10,27 +10,26 @@
  * @param {string} version2
  * @return {number}
  */
- var compareVersion = function(version1, version2) {
-  let num1 = version1.split(".");
-  let num2 = version2.split(".");
-  let left = right = 0;
-  while(left < num1.length || right < num2.length){
-      let n1 = left < num1.length ? parseInt(num1[left]) : 0;
-      let n2 = right < num2.length ? parseInt(num2[right]) : 0;
-      if(n1 < n2){
-          return -1;
-
-      }else if(n1 > n2){
-          return 1;
-
-      }else{
-          left++;
-          right++;
-      }
-
+var compareVersion = function (version1, version2) {
+  const num1 = version1.split(".");
+  const num2 = version2.split(".");
+  const length1 = num1.length;
+  const length2 = num2.length;
+  let i = 0;
+  let j = 0;
+  while (i < length1 || j < length2) {
+    const n1 = i < length1 ? parseInt(num1[i]) : 0;
+    const n2 = j < length2 ? parseInt(num2[j]) : 0;
+    if (n1 > n2) {
+      return 1;
+    } else if (n1 < n2) {
+      return -1;
+    } else {
+      i++;
+      j++;
+    }
+    return 0;
   }
-  return 0;
-
 };
 
 const res = compareVersion("0.1", "1.1");

@@ -23,32 +23,35 @@ var quickSort = function (arr) {
 
 /** 更快一点 */
 function quickSort2(arr) {
-  function run(arr, left, right) {
-    if (left < right) {
-      let par = partition(arr, left, right);
-      run(arr, left, par - 1);
-      run(arr, par + 1, right);
-    }
-    return arr;
-  }
-  function partition(arr, left, right) {
-    let par = arr[left];
+  function partition(left, right) {
+    const pivot = arr[left];
     while (left < right) {
-      while (arr[right] >= par && left < right) {
+      while (arr[right] >= pivot && left < right) {
         right--;
       }
+      // if(left >= right) break
       [arr[left], arr[right]] = [arr[right], arr[left]];
-      // console.log(arr.join(), left, right, "----");
-      while (arr[left] <= par && left < right) {
+
+      while (arr[left] <= pivot && left < right) {
         left++;
       }
+      // if(left >= right) break
       [arr[left], arr[right]] = [arr[right], arr[left]];
-      // console.log(arr.join(), left, right);
     }
     return left;
   }
-  let length = arr.length;
-  return run(arr, 0, length - 1);
+
+  function loop(left, right) {
+    if (left < right) {
+      const par = partition(left, right);
+      loop(left, par - 1);
+      loop(par + 1, right);
+    }
+  }
+
+  loop(0, arr.length - 1);
+
+  return arr;
 }
 
 var quick_sort = function (arr, l, r) {

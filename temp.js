@@ -18,6 +18,7 @@ function quickSort3(arr) {
       }
     }
     swap(arr, left, j);
+    return j;
   }
 
   function loop(arr, left, right) {
@@ -31,7 +32,7 @@ function quickSort3(arr) {
 }
 
 const arr = [];
-const N = 300000;
+const N = 10000000;
 for (let i = 0; i < N; i++) {
   const num = Math.floor(Math.random() * N + 1);
   arr.push(num);

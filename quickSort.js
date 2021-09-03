@@ -74,6 +74,7 @@ function quickSort3(arr) {
       }
     }
     swap(arr, left, j);
+    return j;
   }
 
   function loop(arr, left, right) {
@@ -95,5 +96,5 @@ function quickSort3(arr) {
 // console.timeEnd("quickSort2");
 
 console.time("quickSort3");
-quickSort3(arr, 0, arr.length - 1);
+quickSort3(arr);
 console.timeEnd("quickSort3");

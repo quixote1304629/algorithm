@@ -1,3 +1,6 @@
+const { buildRandomArr } = require("./utils");
+
+
 function insertionSort(arr) {
   const length = arr.length;
   for (let i = 1; i < length; i++) {
@@ -11,3 +14,13 @@ function insertionSort(arr) {
   }
   return arr;
 }
+
+// const arr = buildRandomArr(10000);
+// console.time("insertionSort");
+// insertionSort(arr);
+// console.timeEnd("insertionSort");
+
+
+module.exports = {
+  insertionSort: insertionSort,
+};

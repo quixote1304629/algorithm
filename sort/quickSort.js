@@ -93,12 +93,12 @@ const arr = buildRandomArr(10000000);
 // quickSort2(arr);
 // console.timeEnd("quickSort2");
 
-console.time("quickSort3");
-quickSort3(arr);
-console.timeEnd("quickSort3");
+// console.time("quickSort3");
+// quickSort3(arr);
+// console.timeEnd("quickSort3");
 
 // console.log(arr)
 
 module.exports = {
-  quickSort: quickSort3,
+  quickSort3,
 };

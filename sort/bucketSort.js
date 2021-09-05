@@ -1,3 +1,7 @@
+const { buildRandomArr } = require("./utils");
+const { insertionSort } = require("./insertionSort");
+const { quickSort3 } = require("./quickSort");
+
 function bucketSort(arr, bucketSize) {
   if (arr.length === 0) {
     return arr;
@@ -15,7 +19,7 @@ function bucketSort(arr, bucketSize) {
   }
 
   //桶的初始化
-  var DEFAULT_BUCKET_SIZE = 5; // 设置桶的默认数量为5
+  var DEFAULT_BUCKET_SIZE = 100; // 设置桶的默认数量为100
   bucketSize = bucketSize || DEFAULT_BUCKET_SIZE;
   var bucketCount = Math.floor((maxValue - minValue) / bucketSize) + 1;
   var buckets = new Array(bucketCount);
@@ -38,3 +42,9 @@ function bucketSort(arr, bucketSize) {
 
   return arr;
 }
+
+
+const arr = buildRandomArr(10000000);
+console.time("bucketSort");
+bucketSort(arr);
+console.timeEnd("bucketSort");

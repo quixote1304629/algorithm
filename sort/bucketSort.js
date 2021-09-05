@@ -1,6 +1,5 @@
 const { buildRandomArr } = require("./utils");
 const { insertionSort } = require("./insertionSort");
-const { quickSort3 } = require("./quickSort");
 
 function bucketSort(arr, bucketSize) {
   if (arr.length === 0) {

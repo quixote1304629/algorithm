@@ -1,3 +1,5 @@
+const { buildRandomArr } = require("./utils");
+
 var quickSort = function (arr) {
   if (arr.length < 1) return arr;
   const pivotIndex = arr.length >> 1;
@@ -81,12 +83,7 @@ function quickSort3(arr) {
   loop(arr, 0, arr.length - 1);
 }
 
-const arr = [];
-const N = 10000000;
-for (let i = 0; i < N; i++) {
-  const num = Math.floor(Math.random() * N + 1);
-  arr.push(num);
-}
+const arr = buildRandomArr(10000000);
 
 // console.time("quickSort");
 // quickSort(arr);
@@ -101,3 +98,7 @@ quickSort3(arr);
 console.timeEnd("quickSort3");
 
 // console.log(arr)
+
+module.exports = {
+  quickSort: quickSort3,
+};

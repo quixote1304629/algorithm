@@ -49,6 +49,23 @@ var lengthOfLIS2 = function (nums) {
   return Math.max(...dp);
 };
 
+// 一维dp
+var lengthOfLIS2 = function (nums) {
+  if (nums.length === 0) return 0;
+  let ans = 1;
+  const length = nums.length;
+  const dp = new Array(length).fill(1);
+  for (let i = 1; i < length; i++) {
+    for (let j = 0; j < i; j++) {
+      if (nums[i] > nums[j]) {
+        dp[i] = Math.max(dp[i], dp[j] + 1);
+        ans = Math.max(ans, dp[i]);
+      }
+    }
+  }
+  return ans;
+};
+
 /** 找出最长子序列 */
 function LIS(arr) {
   // write code here
@@ -79,7 +96,7 @@ function LIS(arr) {
       maxLen[i] = min + 1;
     }
   }
-  console.log(res, maxLen)
+  console.log(res, maxLen);
   let cur = res.length;
   let index = maxLen.length - 1;
   let result = [];
@@ -93,5 +110,5 @@ function LIS(arr) {
   return result;
 }
 
-const result = LIS([4, 10, 4, 3, 8,2, 9]);
+const result = LIS([4, 10, 4, 3, 8, 2, 9]);
 console.log(result);

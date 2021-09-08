@@ -13,7 +13,9 @@ function insertionSort(arr, left, right) {
   return arr;
 }
 
-/** 归并排序 */
+/** 归并排序
+ * https://www.runoob.com/w3cnote/merge-sort.html
+ */
 function mergeSort(arr = []) {
   function merge(left, mid, right) {
     const temp = arr.slice(left, right + 1);

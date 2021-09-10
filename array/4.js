@@ -3,60 +3,47 @@
  * @param {number[]} nums2
  * @return {number}
  */
+
 var findMedianSortedArrays = function (nums1, nums2) {
   const length1 = nums1.length;
   const length2 = nums2.length;
   let i = (j = 0);
-  const mid = (length1 + length2 + 1) >> 1;
-  const flag = (length1 + length2) % 2 === 0;
-  let k = 0;
-  let target1 = null;
-  let target2 = null;
-  while (i < length1 && j < length2) {
-    if (k === mid) {
-      break;
-    }
+  // 偏右中间位数
+  const mid = ((length1 + length2 + 1) >> 1) + 1;
+  let count = 0;
+  let prev = null;
+  let curr = null;
+  while (i < length1 && j < length2 && count < mid) {
     if (nums1[i] <= nums2[j]) {
-      target1 = nums1[i];
-      k++;
+      prev = curr;
+      curr = nums1[i];
+      count++;
       i++;
     } else {
-      target1 = nums2[j];
-      k++;
+      prev = curr;
+      curr = nums2[j];
+      count++;
       j++;
     }
   }
-  if (k < mid) {
-    let list = null;
-    let z = null;
-    if (i < length1) {
-      list = nums1;
-      z = i;
+
+  if (count < mid) {
+    let list = i < length1 ? nums1 : nums2;
+    let k = i < length1 ? i : j;
+    if (mid === count + 1) {
+      prev = curr;
     } else {
-      list = nums2;
-      z = j;
+      prev = list[mid - count + k - 2];
     }
-    target1 = list[mid - k + z - 1];
-    if (flag) {
-      target2 = list[mid - k + z];
-    }
-  } else {
-    if (flag) {
-      target2 = Math.min(
-        nums1[i] === undefined ? Infinity : nums1[i],
-        nums2[j] === undefined ? Infinity : nums2[j]
-      );
-    }
+    curr = list[mid - count + k - 1];
   }
 
-  console.log(k, target1, target2);
-
-  if (flag) {
-    return (target1 + target2) / 2;
+  if ((length1 + length2) % 2 === 0) {
+    return (curr + prev) / 2;
   } else {
-    return target1;
+    return prev;
   }
 };
 
-const res = findMedianSortedArrays([2], []);
+const res = findMedianSortedArrays([1, 2], [3, 4]);
 console.log(res);

@@ -1,69 +1,46 @@
 /**
+ * https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/
+ * 给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置。
+ * 如果数组中不存在目标值 target，返回 [-1, -1]。
  * @param {number[]} nums
  * @param {number} target
  * @return {number[]}
  */
 var searchRange = function (nums, target) {
-  const result = [-1, -1];
-  const end = nums.length - 1;
+  let result = [-1, -1];
+  if (!nums.length) return result;
 
-  if (nums[end] < target || nums[0] > target) return result;
+  let i = 0;
+  let j = nums.length - 1;
+  let mid = 0;
 
-  let left = 0;
-  let right = end;
-  let mid = end >>> 1;
-  while (left <= right) {
-    if (nums[mid] === target) {
-      break;
+  while (i <= j) {
+    mid = (i + j) >> 1;
+    if (nums[mid] < target) {
+      i = mid + 1;
     } else if (nums[mid] > target) {
-      right = mid - 1;
+      j = mid - 1;
     } else {
-      left = mid + 1;
+      break;
     }
-    mid = (left + right) >>> 1;
   }
 
-  if(nums[mid] !== target) {
-    return result;
+  if (nums[mid] !== target) return result;
+
+  result = [mid, mid];
+
+  let m = mid - 1;
+  while (m >= 0 && nums[m] === target) {
+    result[0] = m--;
   }
 
-  if (mid === 0) {
-    result[0] = 0;
-  } else {
-    let left1 = 0;
-    let right1 = mid;
-    let mid1 = mid >>> 1;
-    while (left1 < right1) {
-      if (nums[mid1] < target) {
-        left1 = mid1 + 1;
-      } else {
-        right1 = mid1 - 1;
-      }
-      mid1 = (left1 + right1) >>> 1;
-      console.log(left1, right1)
-    }
-    result[0] = nums[left1] === target ? left1 : left1 + 1;
-  }
-
-  if (mid === end) {
-    result[1] = end;
-  } else {
-    let left2 = mid;
-    let right2 = end;
-    let mid2 = (mid + end) >>> 1;
-    while (left2 < right2) {
-      if (nums[mid2] > target) {
-        right2 = mid2 - 1;
-      } else {
-        left2 = mid2 + 1;
-      }
-      mid2 = (left2 + right2) >>> 1;
-    }
-    result[1] = nums[left2] === target ? left2 : left2 - 1;
+  let n = mid + 1;
+  while (n < nums.length && nums[n] === target) {
+    result[1] = n++;
   }
 
   return result;
 };
 
-const result = searchRange([1,2,3,3,3,3,4,5,9], 3);
+const result = searchRange([1, 2, 3, 3, 3, 3, 4, 5, 9], 3);
 console.log(result);

@@ -1,38 +1,43 @@
-const { buildRandomArr } = require("./sort/utils");
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var searchRange = function (nums, target) {
+  let result = [-1, -1];
+  if (!nums.length) return result;
 
-function mergeSort(arr) {  // 采用自上而下的递归方法
-  var len = arr.length;
-  if(len < 2) {
-      return arr;
+  let i = 0;
+  let j = nums.length - 1;
+  let mid = 0;
+
+  while (i <= j) {
+    mid = (i + j) >> 1;
+    if (nums[mid] < target) {
+      i = mid + 1;
+    } else if (nums[mid] > target) {
+      j = mid - 1;
+    } else {
+      break;
+    }
   }
-  var middle = Math.floor(len / 2),
-      left = arr.slice(0, middle),
-      right = arr.slice(middle);
-  return merge(mergeSort(left), mergeSort(right));
-}
 
-function merge(left, right)
-{
-  var result = [];
+  if (nums[mid] !== target) return result;
 
-  while (left.length && right.length) {
-      if (left[0] <= right[0]) {
-          result.push(left.shift());
-      } else {
-          result.push(right.shift());
-      }
+  result = [mid, mid];
+
+  let m = mid - 1;
+  while (m >= 0 && nums[m] === target) {
+    result[0] = m--;
   }
 
-  while (left.length)
-      result.push(left.shift());
-
-  while (right.length)
-      result.push(right.shift());
+  let n = mid + 1;
+  while (n < nums.length && nums[n] === target) {
+    result[1] = n++;
+  }
 
   return result;
-}
+};
 
-const arr = buildRandomArr(1000);
-console.time("mergeSort");
-mergeSort(arr);
-console.timeEnd("mergeSort");
+const res = searchRange([5, 7, 7, 8, 8, 10], 6);
+console.log(res);

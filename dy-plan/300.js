@@ -10,6 +10,7 @@
 var lengthOfLIS = function (nums) {
   const length = nums.length;
   if (length < 2) return length;
+  // tail[i]: 长度为(i+1)的递增子序列中，最小的末尾值
   const tail = [nums[0]];
   let end = 0;
   for (let i = 1; i < length; i++) {

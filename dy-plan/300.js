@@ -69,7 +69,6 @@ var lengthOfLIS2 = function (nums) {
 
 /** 找出最长子序列 */
 function LIS(arr) {
-  // write code here
   if (!arr.length) return [];
   let res = [arr[0]];
   let maxLen = new Array(arr.length).fill(1);
@@ -78,8 +77,6 @@ function LIS(arr) {
       res.push(arr[i]);
       maxLen[i] = res.length;
     } else {
-      // let pos = res.filter((item) => item>=arr[i])[0]
-      // let index = res.indexOf(pos)
       let min = 0;
       let max = res.length - 1;
       while (min <= max) {
@@ -97,7 +94,6 @@ function LIS(arr) {
       maxLen[i] = min + 1;
     }
   }
-  console.log(res, maxLen);
   let cur = res.length;
   let index = maxLen.length - 1;
   let result = [];

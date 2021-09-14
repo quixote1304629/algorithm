@@ -70,35 +70,37 @@ var lengthOfLIS2 = function (nums) {
 /** 找出最长子序列 */
 function LIS(arr) {
   if (!arr.length) return [];
-  let res = [arr[0]];
-  let maxLen = new Array(arr.length).fill(1);
+  const tail = [arr[0]];
+  const dp = new Array(arr.length).fill(1);
   for (let i = 1; i < arr.length; i++) {
-    if (arr[i] > res[res.length - 1]) {
-      res.push(arr[i]);
-      maxLen[i] = res.length;
+    if (arr[i] > tail[tail.length - 1]) {
+      tail.push(arr[i]);
+      dp[i] = tail.length;
     } else {
       let min = 0;
-      let max = res.length - 1;
+      let max = tail.length - 1;
       while (min <= max) {
         let mid = Math.floor((max + min) / 2);
-        if (res[mid] > arr[i]) {
+        if (tail[mid] > arr[i]) {
           max = mid - 1;
-        } else if (res[mid] < arr[i]) {
+        } else if (tail[mid] < arr[i]) {
           min = mid + 1;
         } else {
           min = mid;
           break;
         }
       }
-      res[min] = arr[i];
-      maxLen[i] = min + 1;
+      tail[min] = arr[i];
+      dp[i] = min + 1;
     }
   }
-  let cur = res.length;
-  let index = maxLen.length - 1;
-  let result = [];
+  console.log(tail.join());
+  console.log(dp.join());
+  let cur = tail.length;
+  let index = dp.length - 1;
+  const result = [];
   while (cur > 0) {
-    if (maxLen[index] == cur) {
+    if (dp[index] == cur) {
       result.unshift(arr[index]);
       cur--;
     }
@@ -109,3 +111,9 @@ function LIS(arr) {
 
 const result = LIS([4, 10, 4, 3, 8, 2, 9]);
 console.log(result);
+
+/**
+ * 2,8,9
+ * 1,2,1,1,2,1,3
+ * [ 3, 8, 9 ]
+ */

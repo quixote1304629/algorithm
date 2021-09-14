@@ -70,7 +70,9 @@ var lengthOfLIS2 = function (nums) {
 /** 找出最长子序列 */
 function LIS(arr) {
   if (!arr.length) return [];
+  // tail[i]: 长度为(i+1)的递增子序列中，最小的末尾值
   const tail = [arr[0]];
+  // dp[i] 以索引i结尾元素的最长子序列长度
   const dp = new Array(arr.length).fill(1);
   for (let i = 1; i < arr.length; i++) {
     if (arr[i] > tail[tail.length - 1]) {

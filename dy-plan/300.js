@@ -111,7 +111,8 @@ function LIS(arr) {
   return result;
 }
 
-const result = LIS([4, 10, 4, 3, 8, 2, 9]);
+// const result = LIS([4, 10, 4, 3, 8, 2, 9]);
+const result = LIS([2, 10, 9]);
 console.log(result);
 
 /**

@@ -1,3 +1,7 @@
+/**
+ * 快速排序时间复杂度分析: https://www.cnblogs.com/HDK2016/p/6876313.html
+ */
+
 const { buildRandomArr } = require("./utils");
 
 var quickSort = function (arr) {

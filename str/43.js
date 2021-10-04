@@ -1,3 +1,5 @@
+/** 大数相乘 */
+
 /**
  * @param {string} num1
  * @param {string} num2

@@ -19,6 +19,7 @@
 var postorderTraversal = function (root) {
   const queue = [];
   const result = [];
+  /** 上一个加入result的节点 */
   let prev = null;
   let curr = root;
   while (queue.length || curr) {

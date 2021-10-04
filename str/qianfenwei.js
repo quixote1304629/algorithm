@@ -43,7 +43,7 @@ function qianfenwei2(num) {
   return arr.join(",") + str.slice(intLength);
 }
 
-/** 重点 */
+
 function numFormat(num) {
   var res = num.toString().replace(/\d+/, function (n) {
     // 先提取整数部分 (?=x) 含义: 以x结尾
@@ -57,6 +57,7 @@ function numFormat(num) {
   return res;
 }
 
+/** 重点 */
 function numFormat2(num) {
   const splitArr = num.toString().split(".");
   const intPart = splitArr[0];

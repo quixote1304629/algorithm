@@ -6,6 +6,7 @@
  */
 
 /**
+ * 二维dp
  * @param {string} s
  * @return {string}
  */
@@ -37,6 +38,7 @@ var longestPalindrome = function (s) {
   return ans;
 };
 
+/** 一维dp */
 var longestPalindrome = function (s) {
   const length = s.length;
   if (length <= 1) return s;
@@ -62,6 +64,33 @@ var longestPalindrome = function (s) {
   return ans;
 };
 
+
+/** 一维dp */
+ var longestPalindrome = function(s) {
+  let ans = s.charAt(0)
+  const length = s.length
+  const dp = new Array(length).fill(true)
+  for(let i = 1; i < length; i++) {
+      const c1 = s.charAt(i)
+      let prev = true
+      for(let j = i - 1; j >= 0; j--) {
+          const temp = dp[j]
+          const c2 = s.charAt(j)
+          if(c1 === c2) {
+              dp[j] = prev
+              if(prev && (i - j + 1) > ans.length) {
+                  ans = s.slice(j, i+1)
+              }
+          } else {
+              dp[j] = false
+          }
+          prev = temp
+      }
+  }
+  return ans
+};
+
+/** 循环 */
 var longestPalindrome = function (s) {
   const n = s.length;
   if (n === 0) return "";

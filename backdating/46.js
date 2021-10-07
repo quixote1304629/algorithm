@@ -43,5 +43,32 @@ var permute = function (nums) {
   return result;
 };
 
+
+/** 交换元素的写法 */
+var permute = function(nums) {
+  const length = nums.length
+  const result = []
+  // p: 交换到第几个元素
+  function dfs(p) {
+      if(p === length){
+          result.push([...nums])
+          return
+      }
+      for(let i = p; i < length; i++) {
+          swap(nums, p, i)
+          dfs(p + 1)
+          swap(nums, p, i)
+      }
+  }
+  dfs(0)
+  return result
+};
+
+function swap(arr, i, j) {
+  const temp = arr[i]
+  arr[i] = arr[j]
+  arr[j] = temp
+}
+
 const res = permute([1, 2, 3]);
 console.log(res);

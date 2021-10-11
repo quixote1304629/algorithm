@@ -17,25 +17,24 @@
  */
 
 var postorderTraversal = function (root) {
-  const queue = [];
   const result = [];
+  const queue = [];
+  let p = root;
   /** 上一个加入result的节点 */
   let prev = null;
-  let curr = root;
-  while (queue.length || curr) {
-    while (curr) {
-      queue.push(curr);
-      curr = curr.left;
+  while (queue.length || p) {
+    while (p) {
+      queue.push(p);
+      p = p.left;
     }
 
-    curr = queue.pop();
-    if (!curr.right || prev === curr.right) {
+    const curr = queue.pop();
+    if (!curr.right || curr.right === prev) {
       result.push(curr.val);
       prev = curr;
-      curr = null;
     } else {
       queue.push(curr);
-      curr = curr.right;
+      p = curr.right;
     }
   }
   return result;

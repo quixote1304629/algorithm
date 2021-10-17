@@ -32,9 +32,15 @@ var merge = function (nums1 = [], m = 0, nums2 = [], n = 0) {
     }
   }
 
-  while (j >= 0) {
-    nums1[j] = nums2[j];
-    j--;
+  // while (j >= 0) {
+  //   nums1[j] = nums2[j];
+  //   j--;
+  // }
+
+  if (j >= 0) {
+    const count = j + 1;
+    const lastList = nums2.slice(0, count);
+    nums1.splice(0, count, ...lastList);
   }
   return nums1;
 };

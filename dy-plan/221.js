@@ -13,6 +13,8 @@ var maximalSquare = function (matrix) {
   const len2 = matrix[0].length;
   if (len2 === 0) return 0;
   let ans = 0;
+
+  // dp[i] 以matrix[x][i-1]为正方向右下角， 的最大正方形边长
   const dp = new Array(len2 + 1).fill(0);
 
   for (let j = 0; j < len1; j++) {
